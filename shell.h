@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+char *_strdup(const char *s);
 void execute(char **argv);
 
 #endif

@@ -23,7 +23,8 @@ int main(void)
 			return (-1);
 		}
 
-		cmdline_copy = strdup(cmdline);
+		cmdline_copy = _strdup(cmdline);
+		printf("%s\n", cmdline);
 
 		token = strtok(cmdline, delim);
 		while (token)
@@ -35,6 +36,7 @@ int main(void)
 		argv = malloc(sizeof(char *) * argc);
 
 		token = strtok(cmdline_copy, delim);
+
 		i = 0;
 
 		while (token)
