@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+void _puts(char *c);
+char _putchar(char c);
 char *_strdup(const char *s);
 void execute(char **argv);
 
