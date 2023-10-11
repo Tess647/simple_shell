@@ -41,7 +41,7 @@ int main(void)
 
 		while (token)
 		{
-			argv[i] = token;
+			argv[i] = _strdup(token);
 			token = strtok(NULL, delim);
 			i++;
 		}

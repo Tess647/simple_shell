@@ -29,7 +29,7 @@ char *_strdup(const char *s)
 		string_dup[j] = s[j];
 	}
 
-	string_dup = '\0';
+	string_dup[j] = '\0';
 
 	return (string_dup);
 }
