@@ -28,4 +28,6 @@ typedef struct path_list
 	struct path_list *pointer;
 } path_list;
 
+path_list *add_nodes(char *path);
+
 #endif
