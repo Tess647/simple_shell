@@ -1,7 +1,5 @@
 #include "shell.h"
 
-char *_strdup(char *str);
-
 /**
   * add_nodes - adds directories in PATH as nodes to list
   * @path: pointer to PATH variable
@@ -42,32 +40,4 @@ path_list *add_nodes(char *path)
 		dir = strtok(NULL, ":");
 	}
 	return (head);
-}
-
-
-/**
- *_strdup - copies a string to a newly allocated space
- *@str: pointer to string
- *
- *Return: pointer to a new string on success
- *NULL on failure or if str = NULL
- */
-char *_strdup(char *str)
-{
-	char *s;
-	int len = 0;
-	int i;
-
-	if (str == NULL)
-		return (NULL);
-
-	while (str[len])
-		len++;
-
-	s = malloc((len * sizeof(char)) + 1);
-	if (s == NULL)
-		return (NULL);
-	for (i = 0; i < len; i++)
-		s[i] = str[i];
-	return (s);
 }
