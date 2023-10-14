@@ -13,8 +13,8 @@ int main(void)
 	char **argv = NULL, *delim = " \n";
 	int i = 0, argc = 0;
 	/*Parse through PATH and create a linked list of directories*/
-	char *path = _getenv("PATH")
-	path_list * head = add_nodes(path);
+	char *path = _getenv("PATH");
+	path_list *head = add_nodes(path);
 
 	while (1)
 	{
@@ -50,13 +50,13 @@ int main(void)
 		}
 		argv[i] = NULL;
 
-		/* execute cmmand */
-		execute(argv, head);
+		/* execute command */		
+		execute(argv);
 
 	}
 	free(cmdline), free(cmdline_copy), free(argv);
 	/*create a function to free the list*/
-	free_list(head);
+	/*free_list(head);*/
 
 	return (0);
 }

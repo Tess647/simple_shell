@@ -29,5 +29,6 @@ typedef struct path_list
 } path_list;
 
 path_list *add_nodes(char *path);
+char *_getenv(const char *name);
 
 #endif
