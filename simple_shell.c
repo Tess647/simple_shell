@@ -50,13 +50,11 @@ int main(void)
 		}
 		argv[i] = NULL;
 
-		/* execute command */		
-		execute(argv, head);
+		execute(argv, head); /* execute command */
 
 	}
 	free(cmdline), free(cmdline_copy), free(argv);
-	/*create a function to free the list*/
-	/*free_list(head);*/
+	free_list(head);
 
 	return (0);
 }
