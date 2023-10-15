@@ -13,8 +13,6 @@ void _puts(char *c);
 int _putchar(char c);
 char *_strdup(const char *s);
 
-void execute(char **argv);
-
 extern char **environ;
 
 /**
@@ -30,5 +28,5 @@ typedef struct path_list
 
 path_list *add_nodes(char *path);
 char *_getenv(const char *name);
-
+void execute(char **argv, path_list *path_list_head);
 #endif

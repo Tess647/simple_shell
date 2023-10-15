@@ -6,7 +6,6 @@
  *
  *  Return: Nothing
  */
-
 void execute(char **argv)
 {
 	pid_t child_pid = fork();
@@ -48,4 +47,3 @@ void execute(char **argv)
 	}
 	free(argv);
 }
-

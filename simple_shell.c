@@ -51,7 +51,7 @@ int main(void)
 		argv[i] = NULL;
 
 		/* execute command */		
-		execute(argv);
+		execute(argv, head);
 
 	}
 	free(cmdline), free(cmdline_copy), free(argv);
