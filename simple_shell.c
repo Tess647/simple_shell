@@ -1,15 +1,6 @@
 #include "shell.h"
 
 /**
-  * _isatty - verify if terminal
-  */
-void _isatty(void)
-{
-	if (isatty(STDIN_FILENO))
-		_puts("#cisfun$ ");
-}
-
-/**
  * main - main function for the shell program
  *
  * Return: 0 Always successful otherwise -1
@@ -20,22 +11,18 @@ int main(void)
 	char *cmdline = NULL, *cmdline_copy = NULL, *token = NULL;
 	size_t n = 0;
 	char **argv = NULL, *delim = " \n";
-	int i = 0, argc = 0;
+	int i = 0, argc = 0, len;
 	/*Parse through PATH and create a linked list of directories*/
 	char *path = _getenv("PATH");
 	path_list *head = add_nodes(path);
+	void (*func)(char **);
 
-	while (1)
+	signal(SIGINT, signal_handler);
+	while (len != EOF)
 	{
 		_isatty();
-		if (getline(&cmdline, &n, stdin) == -1)
-		{
-			if (isatty(STDIN_FILENO))
-			{
-				_puts("\n");
-			}
-			exit(0);
-		}
+		len = getline(&cmdline, &n, stdin);
+		_EOF(len, cmdline);
 
 		cmdline_copy = _strdup(cmdline);
 
@@ -61,6 +48,12 @@ int main(void)
 		argv[i] = NULL;
 
 		execute(argv, head); /* execute command */
+		func = check_custom_build(argv);
+		if (func)
+		{
+			free(cmdline);
+			func(argv);
+		}
 
 	}
 	free(cmdline), free(cmdline_copy), free(argv);

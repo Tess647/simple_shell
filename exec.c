@@ -97,6 +97,7 @@ void execute(char **argv, path_list *path_list_head)
 	if (argv)
 	{
 		iterate_and_execute(argv, path_list_head);
+		
 		/*Clean up memory*/
 		for (j = 0; argv[j] != NULL; j++)
 			free(argv[j]);
@@ -104,3 +105,4 @@ void execute(char **argv, path_list *path_list_head)
 		free(argv);
 	}
 }
+
