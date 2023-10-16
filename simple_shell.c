@@ -8,13 +8,15 @@
 
 int main(void)
 {
-	char *cmdline = NULL, *cmdline_copy = NULL, *token = NULL;
+	char *cmdline = NULL;
 	size_t n = 0;
 	char **argv = NULL, *delim = " \n";
-	int i = 0, argc = 0, len;
+	int len;
+
 	/*Parse through PATH and create a linked list of directories*/
 	char *path = _getenv("PATH");
 	path_list *head = add_nodes(path);
+	
 	void (*func)(char **);
 
 	signal(SIGINT, signal_handler);
@@ -23,29 +25,11 @@ int main(void)
 		_isatty();
 		len = getline(&cmdline, &n, stdin);
 		_EOF(len, cmdline);
-
-		cmdline_copy = _strdup(cmdline);
-
-		token = strtok(cmdline, delim);
-		while (token)
+		argv = split_command_line(cmdline, delim);
+		if (argv == NULL)
 		{
-			token = strtok(NULL, delim);
-			argc++;
+			return (-1);
 		}
-
-		argv = malloc(sizeof(char *) * argc);
-
-		token = strtok(cmdline_copy, delim);
-
-		i = 0;
-
-		while (token)
-		{
-			argv[i] = _strdup(token);
-			token = strtok(NULL, delim);
-			i++;
-		}
-		argv[i] = NULL;
 
 		execute(argv, head); /* execute command */
 		func = check_custom_build(argv);
@@ -56,8 +40,8 @@ int main(void)
 		}
 
 	}
-	free(cmdline), free(cmdline_copy), free(argv);
+	freeargv(argv);
+	free(cmdline);
 	free_list(head);
-
 	return (0);
 }
