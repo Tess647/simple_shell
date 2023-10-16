@@ -21,6 +21,7 @@ char *_strdup(const char *s)
 
 	string_dup = malloc(sizeof(char) * i);
 
+
 	if (!string_dup)
 		return (NULL);
 
@@ -31,5 +32,48 @@ char *_strdup(const char *s)
 
 	string_dup[j] = '\0';
 
+
 	return (string_dup);
+}
+
+/**
+ * _strlen - it gives the length of a string
+ * @str: pointer to the string
+ * Return: the length of string
+ */
+int _strlen(char *str)
+{
+	int i = 0;
+
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
+/**
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
+ *
+ * Return: On success 1. On error, -1 is returned.
+ */
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+
+/**
+ * _puts - prints a string
+ * @c: pointer to string
+ */
+void _puts(char *c)
+{
+	int i = 0;
+
+	while (c[i])
+	{
+		_putchar(c[i]);
+		i++;
+	}
 }

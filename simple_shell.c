@@ -1,6 +1,15 @@
 #include "shell.h"
 
 /**
+  * _isatty - verify if terminal
+  */
+void _isatty(void)
+{
+	if (isatty(STDIN_FILENO))
+		_puts("#cisfun$ ");
+}
+
+/**
  * main - main function for the shell program
  *
  * Return: 0 Always successful otherwise -1
@@ -18,16 +27,17 @@ int main(void)
 
 	while (1)
 	{
-		printf("#cisfun$ ");
-		/* read from the user */
+		_isatty();
 		if (getline(&cmdline, &n, stdin) == -1)
 		{
-			printf("\n");
-			return (-1);
+			if (isatty(STDIN_FILENO))
+			{
+				_puts("\n");
+			}
+			exit(0);
 		}
 
 		cmdline_copy = _strdup(cmdline);
-		printf("%s\n", cmdline);
 
 		token = strtok(cmdline, delim);
 		while (token)
