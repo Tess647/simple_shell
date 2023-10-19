@@ -34,7 +34,7 @@ int main(void)
 			argc++;
 		}
 
-		argv = malloc(sizeof(char *) * argc);
+		argv = malloc(sizeof(char *) * (argc + 1));
 
 		token = strtok(cmdline_copy, delim);
 
@@ -46,6 +46,7 @@ int main(void)
 			token = strtok(NULL, delim);
 			i++;
 		}
+		argv[i] = NULL;
 
 		execute(argv, head); /* execute command */
 		func = check_custom_build(argv);
@@ -54,9 +55,8 @@ int main(void)
 			free(cmdline);
 			func(argv);
 		}
-
 	}
-	free(cmdline), free(cmdline_copy), free(argv);
+	free(cmdline),free(cmdline_copy), freeargv(argv);
 	free_list(head);
 
 	return (0);

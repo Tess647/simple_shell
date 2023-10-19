@@ -10,6 +10,7 @@
 #include <stddef.h>
 #include <errno.h>
 #include <signal.h>
+#include <sys/stat.h>
 
 int _strlen(char *str);
 void _puts(char *c);

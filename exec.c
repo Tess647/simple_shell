@@ -67,6 +67,19 @@ void execute(char **argv, path_list *path_list_head)
 {
 	path_list *current = path_list_head;
 	char *directory, *full_path;
+	struct stat file_stat;
+
+	if (stat(argv[0], &file_stat) == 0)
+	{
+		if (S_ISREG(file_stat.st_mode) &&
+				(file_stat.st_mode & S_IXUSR))
+		{
+	/* Input is a regular file and is executable,execute it directly */
+			execute_command(argv[0], argv);
+			return;
+			/* Explicitly marking the end of the function*/
+		}
+	}
 
 	while (current)
 	{
@@ -81,7 +94,7 @@ void execute(char **argv, path_list *path_list_head)
 		}
 		free(full_path);
 		current = current->pointer;
-	}	
+	}
 	/* Clean up memory */
 	if (argv == NULL)
 		freeargv(argv);
