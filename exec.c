@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- *execute_command - Function to execute a command given a full path
- *@full_path: path of the command to be executed
- *@argv:double pointer to command
+ * execute_command - Function to execute a command given a full path
+ * @full_path: path of the command to be executed
+ * @argv:double pointer to command
  */
 void execute_command(const char *full_path, char **argv)
 {
@@ -59,12 +59,11 @@ char *construct_full_path(const char *directory, const char *command)
 }
 
 /**
- *iterate_and_execute - Function to iterate through the path list
- *and execute the command
- *@argv: command to be executed
- *@path_list_head: pointer to the head of the linked list
- */
-void iterate_and_execute(char **argv, path_list *path_list_head)
+  *execute - function to execute a command
+  *@argv: command name to be executed
+  *@path_list_head: pointer to the head of directory list
+  */
+void execute(char **argv, path_list *path_list_head)
 {
 	path_list *current = path_list_head;
 	char *directory, *full_path;
@@ -82,27 +81,21 @@ void iterate_and_execute(char **argv, path_list *path_list_head)
 		}
 		free(full_path);
 		current = current->pointer;
-	}
+	}	
+	/* Clean up memory */
+	if (argv == NULL)
+		freeargv(argv);
 }
 
 /**
-  *execute - function to execute a command
-  *@argv: command name to be executed
-  *@path_list_head: pointer to the head of directory list
-  */
-void execute(char **argv, path_list *path_list_head)
+ * freeargv - frees the array of pointers arv
+ * @argv: array of pointers
+ */
+void freeargv(char **argv)
 {
-	int j;
+	int i;
 
-	if (argv)
-	{
-		iterate_and_execute(argv, path_list_head);
-		
-		/*Clean up memory*/
-		for (j = 0; argv[j] != NULL; j++)
-			free(argv[j]);
-
-		free(argv);
-	}
+	for (i = 0; argv[i]; i++)
+		free(argv[i]);
+	free(argv);
 }
-

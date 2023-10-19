@@ -11,13 +11,14 @@ int main(void)
 	char *cmdline = NULL, *cmdline_copy = NULL, *token = NULL;
 	size_t n = 0;
 	char **argv = NULL, *delim = " \n";
-	int i = 0, argc = 0, len;
+	int i = 0, argc = 0, len = 0;
 	/*Parse through PATH and create a linked list of directories*/
 	char *path = _getenv("PATH");
 	path_list *head = add_nodes(path);
 	void (*func)(char **);
 
 	signal(SIGINT, signal_handler);
+
 	while (len != EOF)
 	{
 		_isatty();
@@ -45,7 +46,6 @@ int main(void)
 			token = strtok(NULL, delim);
 			i++;
 		}
-		argv[i] = NULL;
 
 		execute(argv, head); /* execute command */
 		func = check_custom_build(argv);
