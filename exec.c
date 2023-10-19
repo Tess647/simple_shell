@@ -120,25 +120,3 @@ void execute(char **argv, path_list *path_list_head)
 	if (argv == NULL)
 		freeargv(argv);
 }
-
-/**
- * freeargv - frees the array of pointers arv
- * @argv: array of pointers
- */
-void freeargv(char **argv)
-{
-<<<<<<< HEAD
-
-	if (argv)
-		iterate_and_execute(argv, path_list_head);
-
-	/* Clean up memory */
-	freeargv(argv);
-=======
-	int i;
-
-	for (i = 0; argv[i]; i++)
-		free(argv[i]);
-	free(argv);
->>>>>>> main
-}
