@@ -43,18 +43,39 @@ void execute_command(const char *full_path, char **argv)
  *Return: concatenated path on success
  *NULL on failure
  */
-char *construct_full_path(const char *directory, const char *command)
+char *construct_full_path(char *directory, char *command)
 {
+	int dir_length, command_length, i, j;
+	size_t len = 0;
+	char *full_path;
+
+	dir_length = _strlen(directory);
+	command_length = _strlen(command);
+
 	/*+2 for '/' and null terminator*/
-	size_t len = strlen(directory) + strlen(command) + 2;
-	char *full_path = malloc(len);
+	len = dir_length + command_length + 2;
+	full_path = malloc(len);
 
 	if (full_path == NULL)
 	{
 		perror("malloc error");
 		exit(EXIT_FAILURE);
 	}
-	sprintf(full_path, "%s/%s", directory, command);
+
+	for (i = 0; i < dir_length; i++)
+	{
+		full_path[i] = directory[i];
+	}
+	full_path[i] = '/';
+	i++;
+
+	for (j = 0; j < command_length; j++)
+	{
+		full_path[i + j] = command[j];
+	}
+
+	full_path[i + command_length] = '\0';
+
 	return (full_path);
 }
 
@@ -106,9 +127,18 @@ void execute(char **argv, path_list *path_list_head)
  */
 void freeargv(char **argv)
 {
+<<<<<<< HEAD
+
+	if (argv)
+		iterate_and_execute(argv, path_list_head);
+
+	/* Clean up memory */
+	freeargv(argv);
+=======
 	int i;
 
 	for (i = 0; argv[i]; i++)
 		free(argv[i]);
 	free(argv);
+>>>>>>> main
 }

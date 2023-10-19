@@ -21,6 +21,9 @@ void signal_handler(int sig_num);
 void _EOF(int len, char *cmdline);
 void _isatty(void);
 
+char **split_command_line(const char *cmdline, const char *delim);
+void freeargv(char **argv);
+
 extern char **environ;
 
 /**
