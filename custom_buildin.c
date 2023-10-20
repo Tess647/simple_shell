@@ -2,6 +2,7 @@
 
 /**
  * my_exit - exits the shell without a return of status n
+ * @argv: array of arguments
  */
 void my_exit(char **argv)
 {

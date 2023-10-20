@@ -19,7 +19,7 @@ char **split_command_line(const char *cmdline, const char *delim)
 	}
 
 	token = strtok(cmdline_copy, delim);
-	max_args = 10;  /* Adjust this as needed */
+	max_args = 1024;  /* Adjust this as needed */
 
 	argv = malloc(sizeof(char *) * max_args);
 	if (argv == NULL)
