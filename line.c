@@ -1,6 +1,31 @@
 #include "shell.h"
 
 /**
+ * split_command_line_2 - Split the input into commands using the pipe character
+ * @cmdline: string to be split
+ * Return: array of commands
+ */
+char **split_command_line_2(char *cmdline, char *delim1)
+{
+	char **commands = NULL;
+	int num_commands = 0;
+	char *token = strtok(cmdline, delim1);
+
+	while (token != NULL)
+	{
+		commands = realloc(commands, (num_commands + 1) * sizeof(char *));
+		commands[num_commands] = _strdup (token);
+		num_commands++;
+		token = strtok(NULL, delim1);
+	}
+
+	commands = realloc(commands, (num_commands + 1) * sizeof(char *));
+	commands[num_commands] = NULL;
+
+	return (commands);
+}
+
+/**
  * split_command_line - splits a string and
  * makes it an array of pointers to words
  * @cmdline: the string to be split
@@ -61,4 +86,3 @@ void freeargv(char **argv)
 		free(argv[i]);
 	free(argv);
 }
-

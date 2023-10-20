@@ -13,15 +13,6 @@ void signal_handler(int signal_num)
 }
 
 /**
-  * _isatty - verify if terminal
-  */
-void _isatty(void)
-{
-	if (isatty(STDIN_FILENO))
-		_puts("#cisfun$ ");
-}
-
-/**
 * _EOF - handles the End of File
 * @len: return value of getline function
 * @cmdline: buffer
