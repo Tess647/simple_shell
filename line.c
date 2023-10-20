@@ -1,52 +1,51 @@
 #include "shell.h"
 
 /**
- * split_command_line - splits a string and makes it an array of pointers to words
+ * split_command_line - splits a string and
+ * makes it an array of pointers to words
  * @cmdline: the string to be split
  * @delim: the delimiter
  * Return: array of pointers to words
  */
 char **split_command_line(const char *cmdline, const char *delim)
 {
-    char *cmdline_copy, *token, **argv;
-    int max_args, i;
-    
-    cmdline_copy = _strdup(cmdline);
-    if (cmdline_copy == NULL) {
-        /* Handle memory allocation error */
-        return NULL;
-    }
+	char *cmdline_copy, *token, **argv;
+	int max_args, i;
 
-    token = strtok(cmdline_copy, delim);
-    max_args = 10;  /* Adjust this as needed */
+	cmdline_copy = _strdup(cmdline);
+	if (cmdline_copy == NULL)
+	{ /* Handle memory allocation error */
+		return (NULL);
+	}
 
-    argv = malloc(sizeof(char *) * max_args);
-    if (argv == NULL) {
-        /* Handle memory allocation error */
-        free(cmdline_copy);
-        return (NULL);
-    }
+	token = strtok(cmdline_copy, delim);
+	max_args = 10;  /* Adjust this as needed */
 
-    i = 0;
+	argv = malloc(sizeof(char *) * max_args);
+	if (argv == NULL)
+	{ /* Handle memory allocation error */
+		free(cmdline_copy);
+		return (NULL);
+	}
 
-    while (token) {
-        argv[i] = _strdup(token);
+	i = 0;
 
-        token = strtok(NULL, delim);
-        i++;
-
-        /* Resize the argv array if necessary */
-        if (i >= max_args) 
+	while (token)
 	{
-            max_args *= 2;
-            argv = realloc(argv, sizeof(char *) * max_args);
-        }
-    }
+		argv[i] = _strdup(token);
+		token = strtok(NULL, delim);
+		i++;
 
-    argv[i] = NULL;
-
-    free(cmdline_copy);
-    return (argv);
+		/* Resize the argv array if necessary */
+		if (i >= max_args)
+		{
+			max_args *= 2;
+			argv = realloc(argv, sizeof(char *) * max_args);
+		}
+	}
+	argv[i] = NULL;
+	free(cmdline_copy);
+	return (argv);
 }
 
 /**

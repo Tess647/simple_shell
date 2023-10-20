@@ -16,7 +16,7 @@ int main(void)
 	/*Parse through PATH and create a linked list of directories*/
 	char *path = _getenv("PATH");
 	path_list *head = add_nodes(path);
-	
+
 	void (*func)(char **);
 
 	signal(SIGINT, signal_handler);

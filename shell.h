@@ -41,7 +41,6 @@ path_list *add_nodes(char *path);
 char *_getenv(const char *name);
 void execute(char **argv, path_list *path_list_head);
 void free_list(path_list *path_list_head);
-void freeargv(char **argv);
 
 /**
  * struct custom_build - pointer to function with corresponding buildin command
