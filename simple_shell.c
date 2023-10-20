@@ -10,9 +10,9 @@ int main(void)
 {
 	char *cmdline = NULL;
 	size_t n = 0;
-	char **argv = NULL, *delim = " \n";
+	char **argv = NULL, *delim = " \n", *path, *pathname;
 	int len = 0;
-
+	path_list *head = '\0';
 	void (*func)(char **);
 
 	signal(SIGINT, signal_handler);
@@ -24,27 +24,33 @@ int main(void)
 		_EOF(len, cmdline);
 
 		argv = split_command_line(cmdline, delim);
-		if (argv == NULL)
-			freeargv(argv);
+		if (!argv || !argv[0])
+			execute(argv);
 
-		func = check_custom_build(argv);
-		if (func)
-		{
-			free(cmdline);
-			func(argv);
-		}
 		else
 		{
 			/* Parse PATH and create a linked list of directories */
-			char *path = _getenv("PATH");
-			path_list *head = add_nodes(path);
-
-			execute(argv, head); /* execute command */
-			free_list(head);
+			path = _getenv("PATH");
+			head = add_nodes(path);
+			pathname = _whichpath(argv[0], head);
+			func = check_custom_build(argv);
+			if (func)
+			{
+				free(cmdline);
+				func(argv);
+			}
+			else if (!pathname)
+				execute(argv);
+			else if (pathname)
+			{
+				free(argv[0]);
+				argv[0] = pathname;
+				execute(argv);
+			}
 		}
 	}
+	free_list(head);
 	freeargv(argv);
 	free(cmdline);
-	free_list(head);
 	return (0);
 }

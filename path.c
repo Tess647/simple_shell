@@ -41,3 +41,20 @@ path_list *add_nodes(char *path)
 	}
 	return (head);
 }
+
+/**
+ * _strlen - it gives the length of a string
+ * @str: pointer to the string
+ * Return: the length of string
+ */
+int _strlen(char *str)
+{
+	int i = 0;
+
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
