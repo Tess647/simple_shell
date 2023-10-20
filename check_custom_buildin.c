@@ -19,12 +19,13 @@ void(*check_custom_build(char **argv))(char **argv)
 		j = 0;
 		if (S[i].code_name[j] == argv[0][j])
 		{
-			for (j = 0; argv[0][j]; j++)
+			int k;
+			for (k = 0; argv[0][k]; k++)
 			{
-				if (S[i].code_name[j] != argv[0][j])
+				if (S[i].code_name[j + k] != argv[0][k])
 					break;
 			}
-			if (!argv[0][j])
+			if (!argv[0][k])
 				return (S[i].func);
 		}
 	}

@@ -56,5 +56,6 @@ typedef struct custom_build
 void my_exit(char **argv);
 void env(char **argv __attribute__ ((unused)));
 void(*check_custom_build(char **argv))(char **argv);
+int _atoi(char *str);
 
 #endif
