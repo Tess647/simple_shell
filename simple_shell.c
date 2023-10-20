@@ -13,10 +13,6 @@ int main(void)
 	char **argv = NULL, *delim = " \n";
 	int len = 0;
 
-	/*Parse through PATH and create a linked list of directories*/
-	char *path = _getenv("PATH");
-	path_list *head = add_nodes(path);
-
 	void (*func)(char **);
 
 	signal(SIGINT, signal_handler);
@@ -31,12 +27,20 @@ int main(void)
 		if (argv == NULL)
 			freeargv(argv);
 
-		execute(argv, head); /* execute command */
 		func = check_custom_build(argv);
 		if (func)
 		{
 			free(cmdline);
 			func(argv);
+		}
+		else
+		{
+			/* Parse PATH and create a linked list of directories */
+			char *path = _getenv("PATH");
+			path_list *head = add_nodes(path);
+
+			execute(argv, head); /* execute command */
+			free_list(head);
 		}
 	}
 	freeargv(argv);
