@@ -20,6 +20,7 @@ void(*check_custom_build(char **argv))(char **argv)
 		if (S[i].code_name[j] == argv[0][j])
 		{
 			int k;
+
 			for (k = 0; argv[0][k]; k++)
 			{
 				if (S[i].code_name[j + k] != argv[0][k])
