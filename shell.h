@@ -16,6 +16,8 @@ int _strlen(char *str);
 void _puts(char *c);
 int _putchar(char c);
 char *_strdup(const char *s);
+char *concatenate(char *name, char *separator, char *value);
+char *_strcpy(char *dest, const char *src);
 
 void signal_handler(int sig_num);
 void _EOF(int len, char *cmdline);
@@ -39,7 +41,8 @@ typedef struct path_list
 
 path_list *add_nodes(char *path);
 char *_getenv(const char *name);
-void execute(char **argv, path_list *path_list_head);
+void execute(char **argv);
+char *_whichpath(char *command, path_list *head);
 void free_list(path_list *path_list_head);
 
 /**

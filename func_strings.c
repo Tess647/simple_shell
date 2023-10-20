@@ -37,19 +37,58 @@ char *_strdup(const char *s)
 }
 
 /**
- * _strlen - it gives the length of a string
- * @str: pointer to the string
- * Return: the length of string
+ * concatenate - concats 3 strings in a newly allocated memory
+ * @name: first string
+ * @separator: second string
+ * @value: Third string
+ * Return: pointer to the new string
  */
-int _strlen(char *str)
+char *concatenate(char *name, char *separator, char *value)
 {
-	int i = 0;
+	char *result;
+	int name_len, sep_len, value_len, i, j;
 
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	name_len = _strlen(name);
+	sep_len = _strlen(separator);
+	value_len = _strlen(value);
+
+	result = malloc(name_len + sep_len + value_len);
+	if (!result)
+		return (NULL);
+
+	for (i = 0; name[i]; i++)
+		result[i] = name[i];
+	j = i;
+
+	for (i = 0; separator[i]; i++)
+		result[j + i] = separator[i];
+	j = j + i;
+
+	for (i = 0; value[i]; i++)
+		result[j + i] = value[i];
+	j = j + i;
+
+	result[j] = '\0';
+
+	return (result);
+}
+
+/**
+ * _strcpy - Copies the string pointed to by src, including the
+ *           terminating null byte, to the buffer pointed by des.
+ * @dest: Pointer to the destination of copied string.
+ * @src: Pointer to the src of the source string.
+ *
+ * Return: Pointer to dest.
+ */
+char *_strcpy(char *dest, const char *src)
+{
+	size_t n;
+
+	for (n = 0; src[n] != '\0'; n++)
+		dest[n] = src[n];
+	dest[n] = '\0';
+	return (dest);
 }
 
 /**

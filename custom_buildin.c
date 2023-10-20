@@ -30,6 +30,9 @@ void env(char **argv __attribute__ ((unused)))
 {
 	int i;
 
+	if (!environ)
+		return (-1);
+
 	for (i = 0; environ[i]; i++)
 	{
 		_puts(environ[i]);
