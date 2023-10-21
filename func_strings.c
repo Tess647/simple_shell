@@ -52,7 +52,7 @@ char *concatenate(char *name, char *separator, char *value)
 	sep_len = _strlen(separator);
 	value_len = _strlen(value);
 
-	result = malloc(name_len + sep_len + value_len);
+	result = malloc(name_len + sep_len + value_len + 1);
 	if (!result)
 		return (NULL);
 

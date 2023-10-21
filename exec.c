@@ -49,13 +49,13 @@ void execute(char **argv)
 char *_whichpath(char *command, path_list *head)
 {
 	struct stat file_stat;
-	char *string;
+	char *string, *sep = "/";
 
 	path_list *temp_node = head;
 
 	while (temp_node)
 	{
-		string = concatenate(temp_node->dir, "/", command);
+		string = concatenate(temp_node->dir, sep, command);
 		if (stat(string, &file_stat) == 0)
 		{
 			return (string);

@@ -12,7 +12,7 @@ int main(void)
 	size_t n = 0;
 	char **argv = NULL, *delim = " \n", *path, *pathname;
 	int len = 0;
-	path_list *head = '\0';
+	path_list *head = NULL;
 	void (*func)(char **);
 
 	signal(SIGINT, signal_handler);
